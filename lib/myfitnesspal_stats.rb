@@ -1,4 +1,5 @@
 require_relative 'myfitnesspal_stats/version'
+require_relative 'myfitnesspal_stats/account'
 require 'net/http'
 require 'open-uri'
 require 'yaml'
@@ -25,6 +26,3 @@ module MyfitnesspalStats
   end
 =end
 end
-
-account = MyfitnesspalStats::Account.new
-account.login
