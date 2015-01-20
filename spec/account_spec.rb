@@ -12,9 +12,14 @@ describe Account do
   end # -- #initialize
 
   describe '#login' do
-    it 'connect to myfitnesspal homepage' do
+    it 'connects to myfitnesspal homepage' do
+      stream = File.read('')
+      host = "https://www.myfitnesspal.com/"
+      web_crawler = Mechanize.new
+      home_page = web_crawler.get(host)
 
+      expect(home_page.title).to be true
     end
   end # -- #login
-  
+
 end # -- Account
