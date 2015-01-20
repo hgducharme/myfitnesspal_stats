@@ -1,6 +1,7 @@
 require 'mechanize'
 
 class Account
+  attr_reader :username, :password
   def initialize(username, password)
     @username = username
     @password = password
@@ -13,14 +14,13 @@ class Account
     end
 
     # Go to homepage, click log in, and submit the form
-    web_crawler.get('http://www.myfitnesspal.com/') do |home_page|
-      signin_page = web_crawler.click(home_page.link_with(:text => /Log In/))
+    home_page = web_crawler.get('http://www.myfitnesspal.com/')
+    login_btn = web_crawler.click(home_page.link_with(:href => /#fancy_login/))
 
-      my_page = signin_page.form_with(:id => 'loginform') do |form|
+    login_form = signin_page.form_with(:id => 'loginform')
         # Complete username field
-        form.input_with(:name => 'username') do |username| 
-          username = @username
-        end
+    form.input_with(:name => 'username') do |username| 
+      username = @username
 
         # Complete password field
         form.input_with(:name => 'password') do |passowrd| 
@@ -28,8 +28,7 @@ class Account
         end
 
         puts "#{@username} has been successfully logged in!"
-      end.submit
-    end
+    end.submit
 
   end # Account.login
 end # class Account
