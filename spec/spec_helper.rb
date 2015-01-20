@@ -6,6 +6,7 @@ require 'myfitnesspal_stats'
 
 # Libraries required for some test suites
 require 'mechanize'
+require 'fakeweb'
 
 RSpec.configure do |config|
   # some (optional) config here
