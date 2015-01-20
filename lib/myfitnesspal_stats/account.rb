@@ -1,5 +1,7 @@
+require 'mechanize'
+
 class Account
-  def initizalize(username, password)
+  def initialize(username, password)
     @username = username
     @password = password
   end
