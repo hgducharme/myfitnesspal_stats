@@ -9,5 +9,11 @@ require 'mechanize'
 require 'fakeweb'
 
 RSpec.configure do |config|
-  # some (optional) config here
+  config.mock_with :rspec do |c|
+    c.syntax = [:should, :expect]
+  end
+  
+  config.expect_with :rspec do |c|
+    c.syntax = [:should, :expect]
+  end
 end
