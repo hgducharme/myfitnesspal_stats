@@ -7,14 +7,14 @@ class Account
   end
 
   def login
-    agent = Mechanize.new do |agent|
+    web_crawler = Mechanize.new do |web_crawler|
       # MFP refreshes after login
-      agent.follow_meta_refresh = true
+      web_crawler.follow_meta_refresh = true
     end
 
     # Go to homepage, click log in, and submit the form
-    agent.get('http://www.myfitnesspal.com/') do |home_page|
-      signin_page = a.click(home_page.link_with(:text => /Log In/))
+    web_crawler.get('http://www.myfitnesspal.com/') do |home_page|
+      signin_page = web_crawler.click(home_page.link_with(:text => /Log In/))
 
       my_page = signin_page.form_with(:id => 'loginform') do |form|
         # Complete username field
