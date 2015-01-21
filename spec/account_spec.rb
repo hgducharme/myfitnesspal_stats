@@ -25,6 +25,8 @@ describe Account do
         status: ["200", "Success"],
         content_type: "text/html")
 
+      # You might need to comment this URI out, because Mechanize sometimes
+      # doesn't work with the local stubs
       FakeWeb.register_uri(:get,
         "https://www.myfitnesspal.com/account/login",
         body: login_page,
@@ -38,14 +40,21 @@ describe Account do
 
     # This is arbitrary, because Mechanize already tests for the connection
     it 'connects to the login page' do
-      http_status = @home_page.code.to_i
+      http_status = @login_page.code.to_i
 
       expect(http_status).to be == 200
     end
 
-    it 'completes and submits the log in form' do
-       login_form = @login_page.forms_with(:action => "https://www.myfitnesspal.com/account/login")
+    it 'completes the login form and submits it' do
+      login_form = @login_page.form_with(:class => "form login")
+      username = login_form["username"]
+      password = login_form["password"]
+
+      expect(login_form).to be_an_instance_of(Mechanize::Form)
+      expect(username.value).to eq(@username)
+      expect(password.value).to eq(@password)
     end
+
   end # -- #login
 
 end # -- Account
