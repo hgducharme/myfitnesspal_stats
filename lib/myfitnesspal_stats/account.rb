@@ -17,18 +17,24 @@ class Account
     home_page = web_crawler.get('http://www.myfitnesspal.com/')
     login_btn = web_crawler.click(home_page.link_with(:href => /#fancy_login/))
 
-    login_form = signin_page.form_with(:id => 'loginform')
+    login_form = home_page.forms_with(:action => "https://www.myfitnesspal.com/account/login")
+    login_form.each { |f| puts f.action }
+=begin
         # Complete username field
-    form.input_with(:name => 'username') do |username| 
+    login_form.input_with(:name => 'username') do |username| 
       username = @username
 
         # Complete password field
-        form.input_with(:name => 'password') do |passowrd| 
+        login_form.input_with(:name => 'password') do |password| 
           password = @password
         end
 
         puts "#{@username} has been successfully logged in!"
     end.submit
+=end
 
   end # Account.login
 end # class Account
+
+Bob = Account.new('bob', '1234')
+Bob.login
