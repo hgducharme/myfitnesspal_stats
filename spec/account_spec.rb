@@ -16,34 +16,35 @@ describe Account do
 
   describe '#login' do
     before(:each) do
-      stream = File.read('spec/html/mfp_home_page.html')
+      home_page = File.read('spec/html/mfp_home_page.html')
+      login_page = File.read('spec/html/mfp_login_page.html')
+
+      FakeWeb.register_uri(:get, 
+        "https://www.myfitnesspal.com/",
+        body: home_page,
+        status: ["200", "Success"],
+        content_type: "text/html")
 
       FakeWeb.register_uri(:get,
-        "https://www.myfitnesspal.com/",
-        :body => stream,
-        :content_type => "text/html")
+        "https://www.myfitnesspal.com/account/login",
+        body: login_page,
+        status: ["200", "Success"],
+        content_type: "text/html")
 
       @web_crawler = Mechanize.new
       @home_page = @web_crawler.get("https://www.myfitnesspal.com/")
+      @login_page = @web_crawler.get("https://www.myfitnesspal.com/account/login")
     end # -- before :each
 
-    it 'clicks the log in link' do
-      # It returns a hash w/ attributes, so get the #text attribute
-      log_in_button = @home_page.link_with(:href => /#fancy_login/).text
+    # This is arbitrary, because Mechanize already tests for the connection
+    it 'connects to the login page' do
+      http_status = @home_page.code.to_i
 
-      expect(log_in_button).to eq("#fancy_login")
+      expect(http_status).to be == 200
     end
 
     it 'completes and submits the log in form' do
-      log_in_button = @home_page.click(link_with(:href => /#fancy_login/).text)
-      login_form = @home_page.form_with(:id => /loginform/)
-
-      login_form['username'] = @username
-      login_form['password'] = @password
-
-      form.submit
-
-      expect(login_form).to eq()
+       login_form = @login_page.forms_with(:action => "https://www.myfitnesspal.com/account/login")
     end
   end # -- #login
 
