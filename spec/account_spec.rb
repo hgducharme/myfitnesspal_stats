@@ -12,30 +12,16 @@ describe Account do
       @account.should respond_to(:username)
       @account.should respond_to(:password)
     end
-  end # -- #initialize
+  end
 
   describe '#login' do
-    before(:each) do
-      home_page = File.read('spec/html/mfp_home_page.html')
-      login_page = File.read('spec/html/mfp_login_page.html')
 
-
-      @web_crawler = Mechanize.new
-      @home_page = @web_crawler.get("https://www.myfitnesspal.com/")
-      @login_page = @web_crawler.get("https://www.myfitnesspal.com/account/login")
-    end # -- before :each
-
-    # This is arbitrary, because Mechanize already tests for the connection
+    # This is arbitrary, because Mechanize already tests the HTTP connection
     it 'connects to the login page' do
-      http_status = @login_page.code.to_i
-
-      expect(http_status).to be == 200
     end
 
     it 'completes the login form and submits it' do
-      
     end
+  end
 
-  end # -- #login
-
-end # -- Account
+end
