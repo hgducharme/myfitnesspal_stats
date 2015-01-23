@@ -1,11 +1,10 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in myfitnesspal_stats.gemspec
-
 gem 'mechanize', '~> 2.7.3'
 
-group :devlopment do
+group :devlopment, :test do
   gem 'rspec', '~> 3.1.0'
+  gem 'webmock', '~> 1.20.4'
 end
 
 gemspec
