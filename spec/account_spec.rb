@@ -15,12 +15,16 @@ describe Account do
   end
 
   describe '#login' do
-
-    # This is arbitrary, because Mechanize already tests the HTTP connection
-    it 'connects to the login page' do
+    before(:all) do
+      @home_page = 'http://www.myfitnesspal.com'
     end
 
-    it 'completes the login form and submits it' do
+    # This is arbitrary, because Mechanize already tests the HTTP connection
+    it 'connects to the login page', :vcr do
+      response = Net::HTTP.get_response(URI.parse(@home_page))
+    end
+
+    it 'completes the login form and submits it', :vcr do
     end
   end
 
