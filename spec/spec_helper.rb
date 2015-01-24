@@ -3,7 +3,7 @@ $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'myfitnesspal_stats'
 require 'bundler/setup'
 require 'webmock/rspec'
-require 'support/vcr_setup.rb'
+require 'support/vcr_setup'
 require 'net/http'
 require 'uri'
 require 'mechanize'
