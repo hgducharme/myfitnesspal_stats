@@ -1,12 +1,12 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-
 require 'myfitnesspal_stats'
-require 'bundler/setup'
-require 'webmock/rspec'
+
 require 'support/vcr_setup'
+require 'webmock/rspec'
+require 'mechanize'
 require 'net/http'
 require 'uri'
-require 'mechanize'
+require 'bundler/setup'
 Bundler.setup
 
 RSpec.configure do |config|
