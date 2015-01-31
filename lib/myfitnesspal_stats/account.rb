@@ -12,29 +12,22 @@ class Account
       # MFP refreshes after login
       web_crawler.follow_meta_refresh = true
     end
-=begin
+
     # Go to homepage, click log in, and submit the form
     home_page = web_crawler.get('http://www.myfitnesspal.com/')
-    login_btn = web_crawler.click(home_page.link_with(:href => /#fancy_login/))
-
-    login_form = home_page.forms_with(:action => "https://www.myfitnesspal.com/account/login")
-    login_form.each { |f| puts f.action }
-
-        # Complete username field
-    login_form.input_with(:name => 'username') do |username| 
-      username = @username
-
-        # Complete password field
-        login_form.input_with(:name => 'password') do |password| 
-          password = @password
-        end
-
-        puts "#{@username} has been successfully logged in!"
-    end.submit
-=end
-
+    login_form = home_page.form_with(id: "fancy_login")
+    login_form['username'] = @username
+    login_form['password'] = @password
+    current_page = login_form.submit
+    
+    unless current_page.uri == "https://www.myfitnesspal.com/account/login"
+      puts "#{@username} has been successfully logged in!"
+    else
+      puts "Uh-oh, the username or password was incorrect. Please try again."
+    end
+  
   end # Account.login
 end # class Account
 
-Bob = Account.new('bob', '1234')
-Bob.login
+Hunter = Account.new('DucharmeHD', 'REDACTED')
+Hunter.login
