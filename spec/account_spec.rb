@@ -15,16 +15,17 @@ describe Account do
   end
 
   describe '#login' do
-    before(:all) do
-      @home_page = 'http://www.myfitnesspal.com'
-    end
+    let(:home_page) { "http://www.google.com" }
 
     # This is arbitrary, because Mechanize already tests the HTTP connection
-    it 'connects to the login page', :vcr do
-      response = Net::HTTP.get_response(URI.parse(@home_page))
+    it 'connects to the home page', :vcr do
+      home_page_cassette = File.new('vcr_cassettes/Account/_login/connects_to_the_home_page.yml', 'r')
+
+      stub_request(:get, home_page).to_return(home_page_cassette)
     end
 
     it 'completes the login form and submits it', :vcr do
+
     end
   end
 
