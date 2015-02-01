@@ -28,6 +28,3 @@ class Account
   
   end # Account.login
 end # class Account
-
-Hunter = Account.new('DucharmeHD', 'REDACTED')
-Hunter.login
