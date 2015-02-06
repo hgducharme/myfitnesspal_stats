@@ -19,11 +19,12 @@ class Account
     login_form['username'] = @username
     login_form['password'] = @password
     current_page = login_form.submit
-    
-    unless current_page.uri == "https://www.myfitnesspal.com/account/login"
-      puts "#{@username} has been successfully logged in!"
-    else
-      puts "Uh-oh, the username or password was incorrect. Please try again."
+
+    # Checks to see if there was an error when logging in
+    begin
+      puts current_page.at('p.flash').text
+    rescue
+      puts "#{@username} was successfully logged in!"
     end
   
   end # Account.login
