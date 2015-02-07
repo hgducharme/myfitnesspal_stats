@@ -1,8 +1,6 @@
 require_relative 'myfitnesspal_stats/version'
 require_relative 'myfitnesspal_stats/account'
-require 'net/http'
-require 'open-uri'
-require 'yaml'
+require_relative 'myfitnesspal_stats/client'
 require 'mechanize'
 
 # Possible gems to use:
@@ -11,18 +9,19 @@ require 'mechanize'
 # - hpricot or searching within html documents
 # - REXML for parsing XML
 
-module MyfitnesspalStats
 =begin
-  class Day
-
-  end
-
-  class Food
-
+  class Nutrition_data
   end
 
   class Weight
+  end
 
+  class Diary
   end
 =end
+
+module MyfitnesspalStats 
+  def self.scrape
+    Client.run
+  end
 end
