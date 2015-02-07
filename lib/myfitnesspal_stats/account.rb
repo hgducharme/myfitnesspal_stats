@@ -1,7 +1,7 @@
 require 'mechanize'
 
 class Account
-  attr_reader :username, :password
+  #attr_reader :username, :password
   def initialize(username = nil, password = nil)
     @username = username
     @password = password
