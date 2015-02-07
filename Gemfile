@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'mechanize', '~> 2.7.3'
+gem 'highline', '~> 1.6.21'
 
 group :devlopment, :test do
   gem 'rspec'
