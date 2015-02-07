@@ -2,7 +2,7 @@ require 'mechanize'
 
 class Account
   attr_reader :username, :password
-  def initialize(username, password)
+  def initialize(username = nil, password = nil)
     @username = username
     @password = password
   end
@@ -21,10 +21,14 @@ class Account
     current_page = login_form.submit
 
     # Checks to see if there was an error when logging in
-    begin
-      puts current_page.at('p.flash').text
-    rescue
-      puts "#{@username} was successfully logged in!"
+   begin
+      calories_left = current_page.at('div#calories-remaining-number').text
+      puts "#{@username} has successfully logged in!"
+      return true
+    rescue StandardError
+      flash = current_page.at('p.flash').text
+      puts flash
+      return false
     end
   
   end # Account.login
