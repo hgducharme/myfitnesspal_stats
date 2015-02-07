@@ -15,6 +15,3 @@ class Client
     end
   end # Client.run
 end # class Client
-
-client = Client.new
-client.run
