@@ -22,11 +22,11 @@ class Account
 
     # Checks to see if there was an error when logging in
    begin
-      calories_left = current_page.at('div#calories-remaining-number').text
+      calories_left = current_page.search('div#calories-remaining-number').text
       puts "#{@username} has successfully logged in!"
-      return true
+      return current_page
     rescue StandardError
-      flash = current_page.at('p.flash').text
+      flash = current_page.search('p.flash').text.split(' ').to_a
       puts flash
       return false
     end
