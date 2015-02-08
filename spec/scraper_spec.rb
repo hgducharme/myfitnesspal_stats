@@ -9,7 +9,7 @@ describe Scraper, :vcr do
     end
   end
 
-  describe '#get_macros' do
+  describe 'the get_macros method' do
 
   end
 
