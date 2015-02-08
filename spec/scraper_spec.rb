@@ -10,7 +10,17 @@ describe Scraper, :vcr do
   end
 
   describe 'the get_macros method' do
+    it 'takes a date' do
+      
+    end
 
+    it 'does not fail if no date is given' do
+
+    end
+
+    it 'returns a hash with the date and macro totals' do
+
+    end
   end
 
 end
