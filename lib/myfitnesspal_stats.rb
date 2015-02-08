@@ -1,6 +1,6 @@
 require_relative 'myfitnesspal_stats/version'
 require_relative 'myfitnesspal_stats/account'
-require_relative 'myfitnesspal_stats/client'
+require_relative 'myfitnesspal_stats/scraper'
 require 'mechanize'
 
 # Possible gems to use:
@@ -21,7 +21,5 @@ require 'mechanize'
 =end
 
 module MyfitnesspalStats 
-  def self.scrape
-    Client.run
-  end
+  
 end
