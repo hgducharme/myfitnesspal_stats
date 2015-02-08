@@ -13,8 +13,9 @@ describe Account, :vcr do
     let(:home_page) { "http://www.google.com" }
 
     # This is arbitrary, because Mechanize already tests the HTTP connection
-    # Skip because implementation of VCR & Webmock needs revision
-    skip 'connects to the home page' do
+    it 'connects to the home page' do
+      skip('Implementation of VCR & Webmock needs revision')
+      
       home_page_cassette = File.new(
         'vcr_cassettes/Account/_login/connects_to_the_home_page.yml', 'r')
       stub_request(:get, home_page).to_return(home_page_cassette)
