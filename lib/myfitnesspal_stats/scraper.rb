@@ -21,4 +21,4 @@ class Scraper
   def get_date(year = @date.year, month = @date.month, day = @date.day)
     day = Day.new(year, month, day)
   end # ---- get_date
-end
+end # ---- class Scraper

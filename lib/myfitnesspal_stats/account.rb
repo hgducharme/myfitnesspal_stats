@@ -9,7 +9,7 @@ class Account
     @web_crawler = Mechanize.new do |web_crawler|
       web_crawler.follow_meta_refresh = true
     end
-  end
+  end # ---- initialize
 
   def login
     # Go to homepage, click log in, and submit the form
@@ -30,5 +30,5 @@ class Account
       return false
     end
   
-  end # Account.login
-end # class Account
+  end # ---- login
+end # ---- class Account
