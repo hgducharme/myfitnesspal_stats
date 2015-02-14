@@ -13,6 +13,7 @@ class Scraper
     @login_page = @account.login
 
     @web_crawler = Mechanize.new do |web_crawler|
+      web_crawler.cookie_jar.load('cookies.yml')
       web_crawler.follow_meta_refresh = true
     end
   end # .initialize
@@ -20,7 +21,8 @@ class Scraper
   def get_nutrition(year = @date.year, month = @date.month, day = @date.day)
     date = Date.new(year, month, day)
 
-    diary = @login_page.link_with(href: "/food/diary/#{@username}").click
+    # @login_page.uri already has a trailing slash: /
+    diary = @web_crawler.get("#{@login_page.uri}food/diary/#{@username}?date=#{date}")
     totals_table = diary.search('tr.total')
 
     # Find which nutrients are being tracked, and put them into an array
@@ -35,7 +37,7 @@ class Scraper
       todays_total = totals_table.search('td')[index+1].text.strip
       daily_goal = totals_table.search('td')[index+9].text.strip
       remaining = totals_table.search('td')[index+17].text.strip
-      puts "-- #{nutrient}: \n Total: #{todays_total} \n Your goal: #{daily_goal} \n Remaining: #{remaining} \n\n"
+      #puts "-- #{nutrient}: \n Total: #{todays_total} \n Your goal: #{daily_goal} \n Remaining: #{remaining} \n\n"
 
       nutrient_totals[nutrient] = todays_total, daily_goal, remaining
     end
