@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Hunter Ducharme"]
   spec.email         = ["hgducharme@gmail.com"]
   spec.summary       = %q{Programatically access your daily nutrition from myfitnesspal.}
-  spec.description   = %q{Access your weight, daily nutrition, and other attributes from myfitnesspal.}
-  spec.homepage      = ""
+  spec.description   = %q{A module that replace Myfitnesspal's API. Get access to all of your stats & attributes for nutrition and weight progression.}
+  spec.homepage      = 
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
@@ -18,11 +18,11 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "mechanize"
+  spec.add_runtime_dependency "mechanize", "~> 2.7.3"
 
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec" 
-  spec.add_development_dependency "webmock"
-  spec.add_development_dependency "vcr"
+  spec.add_development_dependency "rspec"
+  spec.add_development_dependency "webmock", "~> 1.20.4"
+  spec.add_development_dependency "vcr", "~> 2.9.3"
 end
