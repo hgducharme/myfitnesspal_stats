@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["hgducharme@gmail.com"]
   spec.summary       = %q{Programatically access your daily nutrition from myfitnesspal.}
   spec.description   = %q{A module that replace Myfitnesspal's API. Get access to all of your stats & attributes for nutrition and weight progression.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/hgducharme/myfitnesspal_stats"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
