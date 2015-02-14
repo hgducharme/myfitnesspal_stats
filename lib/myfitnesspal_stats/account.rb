@@ -23,7 +23,6 @@ class Account
     # Checks to see if there was an error when logging in
     begin
       calories_left = current_page.search('div#calories-remaining-number').text
-      puts "#{@username} has successfully logged in!"
       return current_page
     rescue StandardError
       flash = current_page.search('p.flash').text.split(' ').to_a
