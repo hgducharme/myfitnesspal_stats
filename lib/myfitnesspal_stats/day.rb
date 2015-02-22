@@ -22,7 +22,7 @@ class Day
       /(?<=[a-z])(?=[A-Z])/).to_a
 
     nutrient_totals = Hash.new
-    nutrient_totals["Date"] = @date.strftime("%A, %B %e, %Y")
+    nutrient_totals["Date"] = @date.strftime("%A, %e %B %Y")
 
     # Go through the nutrients table, find the values for its respective column
     nutrients.each_with_index do |nutrient, index|
@@ -36,10 +36,12 @@ class Day
     nutrient_totals
   end # ---- nutrition_totals
 
+=begin
   # WIP
   def weight
     reports = @web_crawler.get("#{@login_page}/reports/")
     weight_report = reports.search('//optgroup')[0].children[0]
     @web_crawler.click(weight_report)
   end
+=end
 end # ---- class Day
