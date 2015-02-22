@@ -26,9 +26,9 @@ class Day
 
     # Go through the nutrients table, find the values for its respective column
     nutrients.each_with_index do |nutrient, index|
-      todays_total = totals_table.search('td')[index+1].text.strip.to_i
-      daily_goal = totals_table.search('td')[index+9].text.strip.to_i
-      difference = totals_table.search('td')[index+17].text.strip.to_i
+      todays_total = totals_table.search('td')[index+1].text.strip
+      daily_goal = totals_table.search('td')[index+9].text.strip
+      difference = totals_table.search('td')[index+17].text.strip
 
       nutrient_totals[nutrient.to_sym] = todays_total, daily_goal, difference
     end
