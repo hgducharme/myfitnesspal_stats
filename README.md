@@ -39,7 +39,8 @@ day = scraper.get_date(2015, 01, 15)
 # ==> #<Day:<object id>
 
 # Note: The nutrients that are returned depend on which nutrients you specified to track in your Myfitnesspal settings.
-# The returned hash has formatting like so: :<nutrient> => [how much you ate, your goal, the difference between the two].
+# The returned hash is formatted like so:
+# :<nutrient> => [how much you ate, your goal, the difference between the two].
 pp day.nutrition_totals
 # ==> 
 {:Date=>"Thursday, 15 January 2015",
