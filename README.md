@@ -24,20 +24,44 @@ Once installation is complete, you cam start accessing your information by initi
 
 ```ruby
 # Insert your username and password for Myfitnesspal
+# WARNING: DO NOT HARDCODE THIS INTO YOUR SCRIPT IF IT IS A PUBLIC SCRIPT. FUTURE REVISIONS WILL MAKE SURE TO SOLVE THIS PROBLEM.
 scraper = Scraper.new('username', 'password')
 ```
 
-To access a specified date and the nutritional information for that day:
+To access a specified date and the nutritional information for that day, fetch a specified date and call the `nutrition_totals` method on that day.
 
 ```ruby
-# The year, month, and day should all be numbers. Although a string will still work if you are stubborn
+# The year, month, and day should all be numbers. Although a string will still work
 scraper.get_date(year, month, day)
 
-# Example:
 # Numbers do not have to be padded with zeros, it can be 01 or just 1.
-scraper.get_date(2015, 01, 15)
+day = scraper.get_date(2015, 01, 15)
 # ==> #<Day:<object id>
+
+# Note: The nutrients that are returned depend on which nutrients you specified to track in your Myfitnesspal settings.
+# The returned hash has formatting like so: "<Nutrient>" => [how much you ate, your goal, the difference between the two].
+pp day.nutrition_totals
+# ==> 
+{"Date"=>"Thursday, 15 January 2015",
+ "Calories"=>["2,399", "2,390", "-9"],
+ "Fat"=>["49", "50", "1"],
+ "Carbs"=>["296", "290", "-6"],
+ "Fiber"=>["45", "35", "-10"],
+ "Protein"=>["197", "195", "-2"],
+ "Potass."=>["2,476", "4,000", "1,524"]}
 ```
+
+
+<!-- 
+days = Hash.new
+(1..21).each do |day|
+  nutrition = scraper.get_date(2015, 02, day).nutrition_totals
+  date = Date.new(2015, 02, day).strftime("%a, %e %b")
+  days["#{date}"] = nutrition
+end
+
+days.each { |number, nutrition_hash| pp nutrition_hash }
+-->
 
 ## Contributing
 
