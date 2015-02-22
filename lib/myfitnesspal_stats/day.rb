@@ -22,15 +22,15 @@ class Day
       /(?<=[a-z])(?=[A-Z])/).to_a
 
     nutrient_totals = Hash.new
-    nutrient_totals["Date"] = @date.strftime("%A, %e %B %Y")
+    nutrient_totals[:Date] = @date.strftime("%A, %e %B %Y")
 
     # Go through the nutrients table, find the values for its respective column
     nutrients.each_with_index do |nutrient, index|
-      todays_total = totals_table.search('td')[index+1].text.strip
-      daily_goal = totals_table.search('td')[index+9].text.strip
-      remaining = totals_table.search('td')[index+17].text.strip
+      todays_total = totals_table.search('td')[index+1].text.strip.to_i
+      daily_goal = totals_table.search('td')[index+9].text.strip.to_i
+      difference = totals_table.search('td')[index+17].text.strip.to_i
 
-      nutrient_totals[nutrient] = todays_total, daily_goal, remaining
+      nutrient_totals[nutrient.to_sym] = todays_total, daily_goal, difference
     end
 
     nutrient_totals
@@ -44,4 +44,5 @@ class Day
     @web_crawler.click(weight_report)
   end
 =end
+
 end # ---- class Day
