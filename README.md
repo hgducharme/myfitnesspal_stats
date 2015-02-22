@@ -20,16 +20,16 @@ Or install it yourself as:
 
 ## Usage
 
-Once installation is complete, you cam start accessing your information by initializing a new web scraper:
-
+**Getting Started:** Once installation of this gem is complete, initialize a new web scraper: 
 ```ruby
+include 'myfitnesspal_stats'
+
 # Insert your username and password for Myfitnesspal
 # WARNING: DO NOT HARDCODE THIS INTO YOUR SCRIPT IF IT IS A PUBLIC SCRIPT. FUTURE REVISIONS WILL MAKE SURE TO SOLVE THIS PROBLEM.
 scraper = Scraper.new('username', 'password')
 ```
 
-To access a specified date and the nutritional information for that day, fetch a specified date and call the `nutrition_totals` method on that day.
-
+**Accessing nutritional information:** To access nutritional information for a specified date, create a new `Day` instance and then call the `.nutrition_totals` on that day:
 ```ruby
 # The year, month, and day should all be numbers. Although a string will still work
 scraper.get_date(year, month, day)
@@ -44,12 +44,33 @@ day = scraper.get_date(2015, 01, 15)
 pp day.nutrition_totals
 # ==> 
 {:Date=>"Thursday, 15 January 2015",
- :Calories=>[2, 2, -9],
- :Fat=>[49, 50, 1],
- :Carbs=>[296, 290, -6],
- :Fiber=>[45, 35, -10],
- :Protein=>[197, 195, -2],
- :"Potass."=>[2, 4, 1]}
+ :Calories=>["2,399", "2,390", "-9"],
+ :Fat=>["49", "50", "1"],
+ :Carbs=>["296", "290", "-6"],
+ :Fiber=>["45", "35", "-10"],
+ :Protein=>["197", "195", "-2"],
+ :"Potass."=>["2,476", "4,000", "1,524"]}
+```
+
+**How to retrive data from the hash:** This is simple ruby practice, but in order to save any frustration I will outline the process here:
+```ruby
+day = scraper.get_date(2015, 01, 15)
+nutrition_data = day.nutrition_totals
+
+pp nutrition_data[:Date]
+pp nutrition_data[:Calories]
+pp nutrition_data[:Calories][0]
+pp nutrition_data[:Fiber][1]
+pp nutrition_data[:Carbs][1, 2]
+
+#### OUTPUT:
+
+# ==> "Thursday, 15 January 2015"
+# ==> ["2,399", "2,390", "-9"]
+# ==> "2,399"
+# ==> "35"
+# ==> ["290", "-6"]
+
 ```
 
 
