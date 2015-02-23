@@ -4,22 +4,21 @@ class Day
   def initialize(year, month, day)
     @date = Date.new(year, month, day)
 
-    @login_page = 'http://www.myfitnesspal.com'
-
-    @web_crawler = Mechanize.new do |web_crawler|
+    $web_crawler = Mechanize.new do |web_crawler|
       web_crawler.cookie_jar.load('cookies.yml')
       web_crawler.follow_meta_refresh = true
+
+      login_page = 'http://www.myfitnesspal.com'
+      $food_diary = web_crawler.get("#{login_page}/food/diary/#{@username}?date=
+      #{@date}")
     end
   end # ---- initialize
 
   def nutrition_totals
-    diary = @web_crawler.get("#{@login_page}/food/diary/#{@username}?date=
-      #{@date}")
-    totals_table = diary.search('tr.total')
+    totals_table = $food_diary.search('tr.total')
 
-    # Find which nutrients are being tracked, and put them into an array
-    nutrients = diary.search('tfoot').search('td.alt').text.split(
-      /(?<=[a-z])(?=[A-Z])/).to_a
+    nutrients = $food_diary.search('tfoot').search('td.alt').children.to_a
+    nutrients.map! { |nutrient| nutrient = nutrient.text }
 
     nutrient_totals = Hash.new
     nutrient_totals[:Date] = @date.strftime("%A, %e %B %Y")
@@ -35,6 +34,11 @@ class Day
 
     nutrient_totals
   end # ---- nutrition_totals
+
+  def meals
+    meal_headers = $food_diary.search('tr.meal_header').search('td.first').children.to_a
+    meal_headers.map! { |header, value| header = header.text }
+  end
 
 =begin
   # WIP
