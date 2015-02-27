@@ -12,7 +12,7 @@ class Scraper
     @account = Account.new(username, password)
     @login_page = @account.login
 
-    @web_crawler = Mechanize.new do |web_crawler|
+    $web_crawler = Mechanize.new do |web_crawler|
       web_crawler.cookie_jar.load('cookies.yml')
       web_crawler.follow_meta_refresh = true
     end
