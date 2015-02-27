@@ -39,13 +39,33 @@ class Day
     end
 
     nutrient_totals
-    
+
   end # ---- nutrition_totals
 
   def meals
-    meal_headers = $food_diary.search('tr.meal_header').search('td.first').children.to_a
-    meal_headers.map! { |header, value| header = header.text }
-  end
+    table_headers = $food_diary.search('tr.meal_header').search('td.first').children
+
+    meal_headers = Hash.new
+
+=begin //TODO
+----------------------
+    table_headers.select do |header|
+      header = Meal.new
+
+      meal_headers[header] = {}
+    end
+
+    puts meal_headers
+----------------------
+I call: 
+  day.meals
+
+I want to return: 
+  # ==> { meal_1: {entries...}, meal_2: {entries...} }
+----------------------
+=end
+
+  end # ---- meals
 
 =begin
   # WIP
