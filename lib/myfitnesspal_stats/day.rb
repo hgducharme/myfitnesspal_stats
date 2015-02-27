@@ -1,3 +1,4 @@
+require_relative 'meal'
 require 'mechanize'
 
 class Day
@@ -9,8 +10,7 @@ class Day
       web_crawler.follow_meta_refresh = true
 
       login_page = 'http://www.myfitnesspal.com'
-      $food_diary = web_crawler.get("#{login_page}/food/diary/#{@username}?date=
-      #{@date}")
+      $food_diary = web_crawler.get("#{login_page}/food/diary/#{@username}?date=#{@date}")
     end
   end # ---- initialize
 
