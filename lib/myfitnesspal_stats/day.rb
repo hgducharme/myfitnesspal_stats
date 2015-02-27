@@ -2,7 +2,7 @@ require_relative 'meal'
 require 'mechanize'
 
 class Day
-  attr_accessor :date
+  attr_reader :date
 
   def initialize(year, month, day)
     @date = Date.new(year, month, day)
@@ -13,7 +13,11 @@ class Day
 
       login_page = 'http://www.myfitnesspal.com'
       $food_diary = web_crawler.get("#{login_page}/food/diary/#{@username}?date=#{@date}")
+
+      update_cookies = web_crawler.cookie_jar.save('cookies.yml', 
+        session: true)
     end
+
   end # ---- initialize
 
   def nutrition_totals
@@ -35,6 +39,7 @@ class Day
     end
 
     nutrient_totals
+    
   end # ---- nutrition_totals
 
   def meals
