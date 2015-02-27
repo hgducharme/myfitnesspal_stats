@@ -10,7 +10,7 @@ class Scraper
     @date = Date.today
 
     @account = Account.new(username, password)
-    @login_page = @account.login
+    $login_page = @account.login
 
     $web_crawler = Mechanize.new do |web_crawler|
       web_crawler.cookie_jar.load('cookies.yml')
