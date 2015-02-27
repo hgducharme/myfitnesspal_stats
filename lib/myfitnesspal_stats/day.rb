@@ -2,6 +2,8 @@ require_relative 'meal'
 require 'mechanize'
 
 class Day
+  attr_accessor :date
+
   def initialize(year, month, day)
     @date = Date.new(year, month, day)
 
