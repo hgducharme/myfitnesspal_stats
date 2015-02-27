@@ -29,6 +29,8 @@ include 'myfitnesspal_stats'
 scraper = Scraper.new('username', 'password')
 ```
 
+<br>
+
 **Accessing nutritional information:** To access nutritional information for a specified date, create a new `Day` instance and then call the `.nutrition_totals` on that day:
 ```ruby
 # The year, month, and day should all be numbers. Although a string will still work
@@ -51,6 +53,8 @@ pp day.nutrition_totals
  :Protein=>["197", "195", "-2"],
  :"Potass."=>["2,476", "4,000", "1,524"]}
 ```
+
+<br>
 
 **How to retrive data from the hash:** This is simple ruby practice, but in order to save any frustration I will outline the process here:
 ```ruby
