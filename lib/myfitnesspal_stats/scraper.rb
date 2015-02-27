@@ -3,6 +3,8 @@ require_relative 'day'
 require 'mechanize'
 
 class Scraper
+  attr_reader :username
+
   def initialize(username, password)
     @username = username
     @password = password
