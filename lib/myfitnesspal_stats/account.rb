@@ -26,8 +26,7 @@ class Account
       return current_page
     rescue StandardError
       flash = current_page.search('p.flash').text.split(' ').to_a
-      puts flash
-      return false
+      return flash
     end
   
   end # ---- login
