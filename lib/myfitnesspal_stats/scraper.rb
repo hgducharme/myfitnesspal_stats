@@ -24,3 +24,7 @@ class Scraper
     day = Day.new(year, month, day)
   end # ---- get_date
 end # ---- class Scraper
+
+scraper = Scraper.new('DucharmeHD', 'Ruger039')
+day = scraper.get_date(2015, 02, 28)
+pp day.meals

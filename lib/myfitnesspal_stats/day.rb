@@ -47,15 +47,15 @@ class Day
 
     meal_headers = Hash.new
 
-=begin //TODO
-----------------------
-    table_headers.select do |header|
-      header = Meal.new
+    table_headers.select do |table_header|
+      meal = Meal.new
 
-      meal_headers[header] = {}
+      meal_headers[table_header.text.to_sym] = meal.entries
     end
 
-    puts meal_headers
+    meal_headers
+
+=begin
 ----------------------
 I call: 
   day.meals
